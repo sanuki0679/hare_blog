@@ -31,7 +31,7 @@ class OAuthController extends Controller
 
         // ユーザーが認証済みか確認
         if ($user->exists) {
-            if ($user->identityProvider->name != $provider) {
+            if (optional($user->identityProvider)->provider != $provider) {
                 return redirect('/login')->withErrors(['oauth_error' => 'このメールアドレスはすでに別の認証で使われています']);
             }
         } else {
